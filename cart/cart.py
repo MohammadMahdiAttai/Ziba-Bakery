@@ -53,5 +53,7 @@ class Cart:
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
     def clear(self):
-        del self.session[settings.CART_SESSION_ID]
+        if settings.CART_SESSION_ID in self.session:
+            del self.session[settings.CART_SESSION_ID]
+        self.cart = {}
         self.save()
