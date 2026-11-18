@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container product-detail">
+  <div class="product-detail-thumb">
+    {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% else %}
+      <span aria-hidden="true">{{ product.category.icon }}</span>
+    {% endif %}
+  </div>
+
+  <div class="product-detail-info">
+    <p class="breadcrumb">
+      <a href="{% url 'catalog:product_list' %}">Shop</a> /
+      <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a> /
+      {{ product.name }}
+    </p>
+
+    <span class="eyebrow cat-label">{{ product.category.name }}</span>
+    <h1>{{ product.name }}</h1>
+    <span class="price-stamp">${{ product.price }} <small>AUD</small></span>
+
+    <p>{{ product.description }}</p>
+
+    {% if product.in_stock %}
+      <span class="stock-tag in">In stock — {{ product.stock }} available</span>
+
+      <form method="post" action="{% url 'cart:cart_add' product.id %}" class="add-to-cart-form">
+        {% csrf_token %}
+        {{ cart_product_form.quantity }}
+        <button type="submit" class="btn btn-stamp">Add to cart</button>
+      </form>
+    {% else %}
+      <p class="sold-out-note">This item is sold out right now — check back once the next batch is baked.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

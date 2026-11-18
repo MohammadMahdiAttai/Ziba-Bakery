@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Your cart — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container section-tight">
+  <div class="section-head">
+    <span class="eyebrow">Order summary</span>
+    <h1>Your cart</h1>
+  </div>
+
+  {% if cart|length > 0 %}
+    <div class="receipt">
+      <div class="receipt-row head">
+        <span></span>
+        <span>Item</span>
+        <span>Quantity</span>
+        <span>Line total</span>
+        <span></span>
+      </div>
+
+      {% for item in cart %}
+        {% with product=item.product %}
+        <div class="receipt-row">
+          <div class="receipt-thumb">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+              <span aria-hidden="true">{{ product.category.icon }}</span>
+            {% endif %}
+          </div>
+
+          <div class="receipt-name">
+            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            <span class="cat-label">${{ item.price }} each</span>
+          </div>
+
+          <form method="post" action="{% url 'cart:cart_add' product.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="override" value="on">
+            <select name="quantity" class="qty-select" onchange="this.form.submit()" aria-label="Change quantity of {{ product.name }}">
+              <option value="1" {% if item.quantity == 1 %}selected{% endif %}>1</option>
+              <option value="2" {% if item.quantity == 2 %}selected{% endif %}>2</option>
+              <option value="3" {% if item.quantity == 3 %}selected{% endif %}>3</option>
+              <option value="4" {% if item.quantity == 4 %}selected{% endif %}>4</option>
+              <option value="5" {% if item.quantity == 5 %}selected{% endif %}>5</option>
+              <option value="6" {% if item.quantity == 6 %}selected{% endif %}>6</option>
+              <option value="7" {% if item.quantity == 7 %}selected{% endif %}>7</option>
+              <option value="8" {% if item.quantity == 8 %}selected{% endif %}>8</option>
+              <option value="9" {% if item.quantity == 9 %}selected{% endif %}>9</option>
+              <option value="10" {% if item.quantity == 10 %}selected{% endif %}>10</option>
+            </select>
+          </form>
+
+          <span class="price-stamp">${{ item.total_price }}</span>
+
+          <form method="post" action="{% url 'cart:cart_remove' product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-link">Remove</button>
+          </form>
+        </div>
+        {% endwith %}
+      {% endfor %}
+
+      <div class="receipt-total">
+        <span>Total</span>
+        <span class="amount">${{ cart.get_total_price }}</span>
+      </div>
+    </div>
+
+    <div class="cart-actions">
+      <a href="{% url 'catalog:product_list' %}" class="btn btn-outline">← Continue shopping</a>
+      <a href="{% url 'orders:order_create' %}" class="btn btn-stamp">Checkout →</a>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>Your cart is empty. <a href="{% url 'catalog:product_list' %}">Browse the shop</a> to find something delicious.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

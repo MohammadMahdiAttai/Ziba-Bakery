@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{% if category %}{{ category.name }} — {% endif %}Shop — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container section-tight">
+  <div class="section-head">
+    <span class="eyebrow">The full menu</span>
+    <h1>{% if category %}{{ category.name }}{% else %}Shop{% endif %}</h1>
+    <p>Everything is baked in small batches, so what's in stock today is what's genuinely fresh.</p>
+  </div>
+
+  <nav class="category-rail" aria-label="Filter by category">
+    <a href="{% url 'catalog:product_list' %}" class="chip {% if not category %}active{% endif %}">All</a>
+    {% for c in categories %}
+      <a href="{{ c.get_absolute_url }}" class="chip {% if category.slug == c.slug %}active{% endif %}">
+        {{ c.icon }} {{ c.name }}
+      </a>
+    {% endfor %}
+  </nav>
+
+  {% if products %}
+    <div class="product-grid">
+      {% for product in products %}
+        {% include "catalog/includes/product_card.html" %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>Nothing here yet{% if category %} in {{ category.name }}{% endif %}. Check back soon, or browse another category.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

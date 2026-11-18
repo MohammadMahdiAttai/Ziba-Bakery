@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Order confirmed — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container">
+  <div class="order-confirmation">
+    {% include "includes/stamp_badge.html" %}
+    <span class="eyebrow">Order confirmed</span>
+    <h1>Thanks, {{ order.first_name }}!</h1>
+    <p>
+      Order <strong>#{{ order.id }}</strong> is confirmed and heading to
+      {{ order.suburb }} {{ order.postcode }}. A copy of this receipt has
+      been sent to {{ order.email }}.
+    </p>
+  </div>
+
+  <div class="receipt" style="max-width: 560px; margin: 0 auto 40px;">
+    {% for item in order.items.all %}
+      <div class="receipt-row" style="grid-template-columns: 1fr auto auto;">
+        <span class="receipt-name">{{ item.quantity }} × {{ item.product.name }}</span>
+        <span class="meta"></span>
+        <span class="price-stamp">${{ item.get_cost }}</span>
+      </div>
+    {% endfor %}
+    <div class="receipt-total">
+      <span>Total</span>
+      <span class="amount">${{ order.get_total_cost }}</span>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding-bottom: 60px;">
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-outline">Back to the shop</a>
+  </div>
+</section>
+{% endblock %}

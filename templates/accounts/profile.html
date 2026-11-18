@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}My account — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container section-tight">
+  <div class="section-head">
+    <span class="eyebrow">My account</span>
+    <h1>Hi, {{ user.username }}</h1>
+  </div>
+
+  <div class="checkout-grid" style="padding-top: 0;">
+    <div class="form-card">
+      <h3>Delivery details</h3>
+      <p class="help-text">Saved here so checkout can fill itself in next time.</p>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-stamp">Save details</button>
+      </form>
+    </div>
+
+    <div>
+      <h3>Order history</h3>
+      {% if orders %}
+        <div class="receipt">
+          {% for order in orders %}
+            <div class="receipt-row" style="grid-template-columns: 1fr auto auto;">
+              <span class="receipt-name">
+                Order #{{ order.id }}
+                <span class="cat-label">{{ order.created|date:"d M Y, H:i" }}</span>
+              </span>
+              <span class="stock-tag {% if order.paid %}in{% else %}out{% endif %}">
+                {% if order.paid %}Paid{% else %}Unpaid{% endif %}
+              </span>
+              <span class="price-stamp">${{ order.get_total_cost }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <p>No orders yet. <a href="{% url 'catalog:product_list' %}">Start shopping</a>.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}About Ziba Bakery — Melbourne{% endblock %}
+
+{% block content %}
+<section class="section container" style="max-width: 760px;">
+  <span class="eyebrow">About us</span>
+  <h1>A cake shop that started in one kitchen</h1>
+  <p>
+    Ziba Bakery began as a single home kitchen in Melbourne's inner north,
+    baking birthday cakes for neighbours and friends of friends. The
+    recipes haven't changed much since — we still mix, fill and ice every
+    order by hand, in small batches, the same morning it's due to go out.
+  </p>
+  <p>
+    "Ziba" means beautiful in Persian, which is exactly what we set out to
+    make: cakes that look and taste like someone made them for you on
+    purpose, not off a factory line. This website is our first time
+    taking orders online, so the kitchen can spend less time on the phone
+    and more time at the bench.
+  </p>
+
+  <h2 style="margin-top: 48px;">How we got here</h2>
+  <div class="timeline">
+    <div class="timeline-row">
+      <time>2019</time>
+      <p>Started baking birthday cakes from a home kitchen in Northcote, taking orders by word of mouth.</p>
+    </div>
+    <div class="timeline-row">
+      <time>2021</time>
+      <p>Moved into a small commercial kitchen closer to the city, and added cupcakes and pastries to the menu.</p>
+    </div>
+    <div class="timeline-row">
+      <time>2023</time>
+      <p>Started delivering across Melbourne suburbs, boxed in kraft paper and tied with string.</p>
+    </div>
+    <div class="timeline-row">
+      <time>2026</time>
+      <p>Opened this website, so the whole menu can be browsed and ordered online for the first time.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 48px;">Ordering something special?</h2>
+  <p>
+    For custom messages, dietary requirements, or a delivery date, place
+    your order through the shop and then send the details through our
+    <a href="{% url 'core:contact' %}">contact page</a> — a real person
+    reads every message before your order goes into the oven.
+  </p>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container">
+  <div class="form-card form-card-narrow">
+    <span class="eyebrow">Get in touch</span>
+    <h1 style="font-size: 1.6rem;">Contact us</h1>
+    <p>Questions about an order, custom cakes, or delivery? Send us a message and we'll reply within one business day.</p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="alert alert-error">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<p class="help-text">{{ field.help_text }}</p>{% endif %}
+          {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-stamp btn-block">Send message</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

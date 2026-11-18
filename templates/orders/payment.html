@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Payment — Ziba Bakery{% endblock %}
+
+{% block content %}
+<section class="container checkout-grid">
+
+  <div>
+    <span class="eyebrow">Order summary</span>
+    <h1 style="font-size: 1.7rem;">Your order</h1>
+
+    <div class="order-summary-list">
+      {% for item in cart %}
+        <div class="order-summary-line">
+          <span class="name">{{ item.quantity }} × {{ item.product.name }}</span>
+          <span class="meta">${{ item.total_price }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="receipt-total" style="border-radius: var(--radius);">
+      <span>Total</span>
+      <span class="amount">${{ cart.get_total_price }}</span>
+    </div>
+
+    <p class="help-text" style="margin-top: 14px;">
+      <a href="{% url 'orders:order_create' %}">← Back to delivery details</a>
+    </p>
+  </div>
+
+  <div class="form-card">
+    <span class="eyebrow">Step 2 of 2</span>
+    <h1 style="font-size: 1.7rem;">Payment</h1>
+
+    <div class="secure-note">🔒 Simulated payment for this university demo — no real card is charged, and card details are validated then discarded, never saved.</div>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="alert alert-error">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="field">
+        <label for="{{ form.card_number.id_for_label }}">{{ form.card_number.label }}</label>
+        {{ form.card_number }}
+        {% if form.card_number.help_text %}<p class="help-text">{{ form.card_number.help_text }}</p>{% endif %}
+        {% if form.card_number.errors %}<ul class="errorlist">{% for e in form.card_number.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="{{ form.expiry.id_for_label }}">{{ form.expiry.label }}</label>
+          {{ form.expiry }}
+          {% if form.expiry.errors %}<ul class="errorlist">{% for e in form.expiry.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+        <div class="field">
+          <label for="{{ form.cvc.id_for_label }}">{{ form.cvc.label }}</label>
+          {{ form.cvc }}
+          {% if form.cvc.errors %}<ul class="errorlist">{% for e in form.cvc.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-stamp btn-block">Pay ${{ cart.get_total_price }}</button>
+    </form>
+  </div>
+
+</section>
+{% endblock %}

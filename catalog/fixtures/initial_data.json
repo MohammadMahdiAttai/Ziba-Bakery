@@ -1,0 +1,66 @@
+[
+  {"model": "catalog.category", "pk": 1, "fields": {"name": "Birthday Cakes", "slug": "birthday-cakes", "icon": "🎂"}},
+  {"model": "catalog.category", "pk": 2, "fields": {"name": "Cupcakes", "slug": "cupcakes", "icon": "🧁"}},
+  {"model": "catalog.category", "pk": 3, "fields": {"name": "Pastries", "slug": "pastries", "icon": "🥐"}},
+  {"model": "catalog.category", "pk": 4, "fields": {"name": "Cookies & Biscuits", "slug": "cookies-biscuits", "icon": "🍪"}},
+
+  {"model": "catalog.product", "pk": 1, "fields": {
+    "category": 1, "name": "Chocolate Mud Cake", "slug": "chocolate-mud-cake",
+    "description": "A rich, dense chocolate cake finished with a glossy dark chocolate ganache. Our most-ordered birthday cake.",
+    "price": "54.95", "available": true, "stock": 12, "created": "2026-06-02T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 2, "fields": {
+    "category": 1, "name": "Red Velvet Cake", "slug": "red-velvet-cake",
+    "description": "Soft layers of classic red velvet sponge with a tangy cream cheese frosting.",
+    "price": "59.95", "available": true, "stock": 8, "created": "2026-06-04T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 3, "fields": {
+    "category": 1, "name": "Vanilla Birthday Cake", "slug": "vanilla-birthday-cake",
+    "description": "A light vanilla bean sponge with buttercream, customisable with a name and candles on request.",
+    "price": "49.95", "available": true, "stock": 10, "created": "2026-06-06T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 4, "fields": {
+    "category": 1, "name": "Lemon Drizzle Cake", "slug": "lemon-drizzle-cake",
+    "description": "Moist lemon sponge soaked in a citrus syrup, topped with a sharp lemon glaze.",
+    "price": "52.95", "available": true, "stock": 6, "created": "2026-06-08T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 5, "fields": {
+    "category": 2, "name": "Classic Vanilla Cupcake", "slug": "classic-vanilla-cupcake",
+    "description": "A bakery favourite: vanilla sponge with a swirl of vanilla bean buttercream.",
+    "price": "4.50", "available": true, "stock": 40, "created": "2026-06-10T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 6, "fields": {
+    "category": 2, "name": "Double Chocolate Cupcake", "slug": "double-chocolate-cupcake",
+    "description": "Chocolate sponge, chocolate chips, chocolate buttercream. For serious chocolate lovers.",
+    "price": "4.95", "available": true, "stock": 35, "created": "2026-06-12T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 7, "fields": {
+    "category": 2, "name": "Salted Caramel Cupcake", "slug": "salted-caramel-cupcake",
+    "description": "Caramel sponge filled with salted caramel sauce, topped with caramel buttercream.",
+    "price": "5.50", "available": true, "stock": 25, "created": "2026-06-14T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 8, "fields": {
+    "category": 3, "name": "Butter Croissant", "slug": "butter-croissant",
+    "description": "Laminated, all-butter croissant baked fresh every morning until golden and flaky.",
+    "price": "5.00", "available": true, "stock": 30, "created": "2026-06-16T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 9, "fields": {
+    "category": 3, "name": "Pain au Chocolat", "slug": "pain-au-chocolat",
+    "description": "Buttery laminated pastry wrapped around two batons of dark chocolate.",
+    "price": "5.50", "available": true, "stock": 28, "created": "2026-06-18T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 10, "fields": {
+    "category": 4, "name": "Anzac Biscuits (pack of 6)", "slug": "anzac-biscuits-pack-of-6",
+    "description": "A true Australian classic: oats, coconut and golden syrup, baked until chewy at the centre.",
+    "price": "8.95", "available": true, "stock": 20, "created": "2026-06-20T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 11, "fields": {
+    "category": 4, "name": "Choc Chip Cookie", "slug": "choc-chip-cookie",
+    "description": "A thick, slightly underbaked cookie loaded with dark and milk chocolate chips.",
+    "price": "3.50", "available": true, "stock": 45, "created": "2026-06-22T09:00:00Z"}},
+
+  {"model": "catalog.product", "pk": 12, "fields": {
+    "category": 4, "name": "Lamington (pack of 4)", "slug": "lamington-pack-of-4",
+    "description": "Squares of sponge cake dipped in chocolate icing and rolled in desiccated coconut.",
+    "price": "11.95", "available": true, "stock": 18, "created": "2026-06-24T09:00:00Z"}}
+]

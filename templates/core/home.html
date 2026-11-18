@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Ziba Bakery — Fresh cakes, cupcakes &amp; pastries in Melbourne{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">Fresh from the oven, every morning</span>
+      <h1>Melbourne's <em>little</em> cake shop</h1>
+      <p class="hero-lede">
+        Ziba Bakery bakes birthday cakes, cupcakes and pastries to order from
+        our kitchen in Melbourne. Browse the shop, add what you like to your
+        basket, and pick a delivery suburb at checkout.
+      </p>
+      <div class="hero-actions">
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-stamp">Browse the shop</a>
+        <a href="{% url 'core:about' %}" class="btn btn-outline" style="border-color: var(--kraft-deep); color: var(--kraft-deep);">Our story</a>
+      </div>
+    </div>
+    <div class="hero-stamp-wrap">
+      {% include "includes/stamp_badge.html" %}
+    </div>
+  </div>
+</section>
+
+<section class="section-tight container">
+  <div class="value-grid">
+    <div class="value-card">
+      <span class="glyph" aria-hidden="true">🌅</span>
+      <h3>Baked fresh daily</h3>
+      <p>Every cake, cupcake and pastry is made from scratch the morning it's listed — nothing sits in a freezer.</p>
+    </div>
+    <div class="value-card">
+      <span class="glyph" aria-hidden="true">🚚</span>
+      <h3>Melbourne-wide delivery</h3>
+      <p>Tell us your suburb at checkout and we'll get your order there, box tied with string and all.</p>
+    </div>
+    <div class="value-card">
+      <span class="glyph" aria-hidden="true">✏️</span>
+      <h3>Custom requests welcome</h3>
+      <p>Need a name piped onto a birthday cake? Mention it on the <a href="{% url 'core:contact' %}">contact page</a> after ordering.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-head">
+    <span class="eyebrow">This week's bakes</span>
+    <h2>Fresh out of the oven</h2>
+    <p>A small taste of the shop — see everything in the full menu.</p>
+  </div>
+
+  {% if featured_products %}
+    <div class="product-grid">
+      {% for product in featured_products %}
+        {% include "catalog/includes/product_card.html" %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>No products yet. Add some from the <a href="{% url 'admin:index' %}">admin panel</a> to see them here.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% endblock %}
