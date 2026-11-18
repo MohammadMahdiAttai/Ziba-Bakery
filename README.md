@@ -7,90 +7,20 @@
 
 An online storefront and order management system for **Ziba Bakery**, an artisanal bakery and cake shop based in Melbourne, Australia. Built with Django as a university project.
 
-Customers can browse cakes, cupcakes, pastries, and cookies by category, build a cart without needing an account, and complete a simulated two-step checkout with delivery details and card validation. Staff can manage inventory, categories, and customer orders via the customized Django administration panel.
-
 <p align="center">
-  <img src="docs/figures/home.png" alt="Ziba Bakery Homepage" width="100%">
-</p>
-
----
-
-## 📸 Screenshots & Visual Walkthrough
-
-### 🛒 Storefront & Catalog
-Explore the bakery menu, filter by pastry/cake category, and view individual product details with real-time stock availability.
-
-| Shop Catalog | Product Detail |
-| :---: | :---: |
-| <img src="docs/figures/shop.png" alt="Shop Catalog" width="100%"> | <img src="docs/figures/product_detail.png" alt="Product Detail" width="100%"> |
-
-### 🧺 Cart & Two-Step Checkout
-A streamlined order workflow featuring session-based cart management, delivery address entry, Luhn-validated card payment simulation, and order confirmation receipts.
-
-| Shopping Cart | Step 1: Delivery Details |
-| :---: | :---: |
-| <img src="docs/figures/cart.png" alt="Shopping Cart" width="100%"> | <img src="docs/figures/checkout_delivery.png" alt="Delivery Details" width="100%"> |
-
-| Step 2: Payment Simulation | Order Confirmation |
-| :---: | :---: |
-| <img src="docs/figures/checkout_payment.png" alt="Payment Simulation" width="100%"> | <img src="docs/figures/order_confirmation.png" alt="Order Confirmation" width="100%"> |
-
-### 🛠️ Staff Administration
-Custom-branded Django administrative dashboard for tracking sales, managing stock, and updating categories and products.
-
-<p align="center">
-  <img src="docs/figures/admin.png" alt="Django Admin Dashboard" width="100%">
-</p>
-
----
-
-## 📐 Architecture & System Design
-
-### 1. System Architecture
-High-level architectural overview illustrating the Django MVT (Model-View-Template) pattern, URL dispatcher, session-based cart layer, template rendering engine, and SQLite database.
-
-<p align="center">
-  <img src="docs/figures/diagram_architecture.png" alt="System Architecture Diagram" width="100%">
-</p>
-
-### 2. Entity-Relationship (ER) Diagram
-Data model design detailing database entities, attributes, primary/foreign keys, and cardinalities across accounts, catalog, and orders.
-
-<p align="center">
-  <img src="docs/figures/diagram_er.png" alt="Entity-Relationship Diagram" width="100%">
-</p>
-
-### 3. Checkout & Ordering Flowchart
-End-to-end checkout execution logic highlighting cart state evaluation, customer authentication checks, form validation, Luhn algorithm execution, and atomic inventory reduction.
-
-<p align="center">
-  <img src="docs/figures/diagram_checkout_flow.png" alt="Checkout Flowchart" width="80%">
+  <img src="docs/figures/home.png" alt="Ziba Bakery Storefront" width="100%">
 </p>
 
 ---
 
 ## ✨ Features
 
-### 🛒 Customer Storefront
-- **Categorized Catalog**: Browse baked goods by categories (*Birthday Cakes*, *Cupcakes*, *Pastries*, *Cookies & Biscuits*).
-- **Product Details & Stock**: Detailed product pages with prices in AUD, availability flags, and real-time stock counters.
-- **Session-Based Cart**: Add, update, and remove items with dynamic subtotal and total calculations without requiring an upfront account.
-- **Two-Step Checkout**:
-  1. Delivery address form (auto-filled for authenticated users with saved profile details).
-  2. Simulated credit card payment form with client/server validation using the **Luhn algorithm**.
-- **Stock Integrity**: Real-time stock verification and atomic transactions (`transaction.atomic`) to deduct inventory safely when an order is placed.
-- **User Accounts & Profiles**: User registration, login/logout, profile management (delivery address, suburb, postcode), and order history tracking.
-- **Contact & Enquiries**: Contact form connected to Django's email backend.
-
-### 🛠️ Staff & Administration
-- Customized Django Admin dashboard (`/admin/`) with Ziba Bakery branding.
-- Full CRUD operations for products, categories, orders, order items, and customer profiles.
-- Inventory tracking with low-stock visibility.
-
-### 🎨 Frontend & Design
-- **"Kraft Bakery Box" Design**: Bespoke warm bakery palette using modern CSS custom properties (no heavy frontend frameworks or build steps required).
-- **Responsive Layout**: Mobile navigation drawer with hamburger toggle.
-- **User Feedback**: Auto-dismissing alerts and status messages.
+- **Product Catalog**: Browse cakes, cupcakes, pastries, and cookies by category with real-time stock levels.
+- **Session Cart**: Add, update, and manage cart items without requiring an account.
+- **Two-Step Checkout**: Delivery details form followed by simulated card payment validated with the **Luhn algorithm**.
+- **Stock Integrity**: Atomic transactions (`transaction.atomic`) automatically verify and deduct inventory upon checkout.
+- **User Accounts**: Registration, login, profile management with saved delivery details, and order history.
+- **Custom Admin Dashboard**: Staff interface for tracking orders, managing products, and updating stock.
 
 ---
 
@@ -98,8 +28,8 @@ End-to-end checkout execution logic highlighting cart state evaluation, customer
 
 - **Backend**: Python 3.12+, Django 6.0
 - **Database**: SQLite
-- **Media & Images**: Pillow (for Django `ImageField`)
-- **Frontend**: Django Templates, Vanilla HTML5, CSS3, JavaScript (no Node.js build step needed)
+- **Image Processing**: Pillow
+- **Frontend**: Django Templates, Vanilla HTML5, CSS3 ("Kraft Bakery Box" theme), JavaScript
 
 ---
 
@@ -107,145 +37,100 @@ End-to-end checkout execution logic highlighting cart state evaluation, customer
 
 ```text
 ziba_bakery/
-├── ziba_bakery/               # Project configuration (settings, root URLs, WSGI/ASGI)
-├── accounts/                  # User registration, login, logout, profile & order history
-├── cart/                      # Session-based shopping cart & context processor
-├── catalog/                   # Categories & products catalog, fixtures
-│   └── fixtures/
-│       └── initial_data.json  # Sample bakery menu (4 categories, 12 products)
-├── core/                      # Marketing & static pages (Home, About, Contact)
-├── docs/
-│   └── figures/               # Screenshots, architecture diagrams, and ER models
-├── orders/                    # Order placement, Luhn payment validation, stock deduction
-├── static/
-│   ├── css/style.css          # Kraft Bakery Box theme styling
-│   └── js/main.js             # Mobile nav toggle & auto-dismiss messages
-├── templates/                 # Organized Django HTML templates
-│   ├── accounts/
-│   ├── cart/
-│   ├── catalog/
-│   ├── core/
-│   ├── orders/
-│   └── base.html              # Base master template
+├── ziba_bakery/        # Settings & URL configuration
+├── core/               # Home, About, Contact pages
+├── catalog/            # Products, categories & initial_data fixture
+├── cart/               # Session-based cart & context processor
+├── orders/             # Order processing, Luhn payment validation, stock deduction
+├── accounts/           # User authentication, profiles & order history
+├── templates/          # HTML templates per app
+├── static/             # CSS styling & JS scripts
+├── docs/figures/       # Screenshots & ER diagram
 ├── manage.py
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### 1. Prerequisites
-- Python 3.12 or higher installed on your machine.
-- Git.
-
-### 2. Clone the Repository
+### 1. Clone & Set Up Environment
 ```bash
 git clone https://github.com/MohammadMahdiAttai/Ziba-Bakery.git
 cd Ziba-Bakery
+
+# Windows (PowerShell)
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+# macOS / Linux
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### 3. Create and Activate a Virtual Environment
-
-- **Windows (PowerShell):**
-  ```powershell
-  python -m venv venv
-  .\venv\Scripts\Activate.ps1
-  ```
-- **Windows (Command Prompt):**
-  ```cmd
-  python -m venv venv
-  venv\Scripts\activate.bat
-  ```
-- **macOS / Linux:**
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
-
-### 4. Install Dependencies
+### 2. Install & Initialize
 ```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 5. Run Database Migrations
-```bash
+# Run migrations
 python manage.py migrate
-```
 
-### 6. Load Sample Bakery Data
-Load the initial menu containing 4 categories and 12 sample bakery items:
-```bash
+# Load sample bakery menu (4 categories, 12 products)
 python manage.py loaddata initial_data
-```
 
-### 7. Create a Superuser (Staff Account)
-```bash
+# Create staff admin user
 python manage.py createsuperuser
-```
 
-### 8. Start the Development Server
-```bash
+# Start server
 python manage.py runserver
 ```
 
-Open your browser and navigate to:
-- **Storefront**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-- **Staff Admin**: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+Visit:
+- **Shop**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+- **Admin**: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
 ---
 
-## 💳 Demo Checkout Instructions
+## 💳 Demo Checkout
 
-Checkout includes a simulated payment gateway. No real charges or payment processors are involved.
+Simulated payment credentials (no real money is charged):
 
-| Field | Demo Value | Note |
-| :--- | :--- | :--- |
-| **Card Number** | `4242 4242 4242 4242` | Validated via Luhn checksum algorithm |
-| **Expiry Date** | Any future date, e.g. `12/28` | Must be formatted as `MM/YY` |
-| **CVC** | Any 3 or 4 digits, e.g. `123` | Numeric security code |
-
-> [!NOTE]
-> The card number is validated with a real Luhn checksum algorithm. Any invalid number or past expiry date will be rejected by the validation logic. Card details are never saved or stored.
+| Field | Demo Value |
+| :--- | :--- |
+| **Card Number** | `4242 4242 4242 4242` (checked via Luhn algorithm) |
+| **Expiry Date** | Any future date (e.g. `12/28`) |
+| **CVC** | Any 3 digits (e.g. `123`) |
 
 ---
 
-## 🗺️ URL Endpoints Overview
+## 🔍 Admin & Architecture
 
-| App | Path | Description |
-| :--- | :--- | :--- |
-| **Core** | `/` | Bakery homepage with featured items |
-| | `/about/` | About Ziba Bakery |
-| | `/contact/` | Contact & enquiry form |
-| **Catalog** | `/shop/` | Full product catalog |
-| | `/shop/category/<slug>/` | Filter products by category |
-| | `/shop/<id>/<slug>/` | Product detail page |
-| **Cart** | `/cart/` | Shopping cart overview |
-| | `/cart/add/<product_id>/` | Add or update items in cart (POST) |
-| | `/cart/remove/<product_id>/` | Remove item from cart (POST) |
-| **Orders** | `/orders/create/` | Step 1: Delivery details form |
-| | `/orders/payment/` | Step 2: Simulated card payment form |
-| | `/orders/<order_id>/` | Order receipt & confirmation |
-| **Accounts** | `/accounts/register/` | Customer sign-up |
-| | `/accounts/login/` | Customer login |
-| | `/accounts/logout/` | Customer logout |
-| | `/accounts/profile/` | Customer profile & order history |
-| **Admin** | `/admin/` | Django staff administration portal |
+<details>
+<summary><b>🛠️ Click to view Django Admin Dashboard</b></summary>
+<br>
+<p align="center">
+  <img src="docs/figures/admin.png" alt="Django Admin" width="100%">
+</p>
+</details>
+
+<details>
+<summary><b>📐 Click to view Entity-Relationship (ER) Diagram</b></summary>
+<br>
+<p align="center">
+  <img src="docs/figures/diagram_er.png" alt="Entity-Relationship Diagram" width="100%">
+</p>
+</details>
 
 ---
 
-## 🔒 Production & Deployment Notes
+## 🔒 Notes
 
-- `DEBUG = True` and hard-coded `SECRET_KEY` in `ziba_bakery/settings.py` are set for local development convenience.
-- When deploying to production:
-  - Set `DEBUG = False`.
-  - Supply `SECRET_KEY` via an environment variable.
-  - Configure `ALLOWED_HOSTS` with your production domain(s).
-  - Configure production static/media file serving (e.g., WhiteNoise, AWS S3, or Nginx).
+- `DEBUG = True` and development `SECRET_KEY` are configured for local testing.
+- For production, set `DEBUG = False`, provide `SECRET_KEY` via environment variables, and configure `ALLOWED_HOSTS`.
 
 ---
 
 ## 📄 License
 
-This project was developed for educational and academic portfolio purposes.
+Developed for academic and educational portfolio purposes.
