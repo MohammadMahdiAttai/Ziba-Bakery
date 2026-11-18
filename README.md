@@ -3,6 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-6.0-green.svg)](https://www.djangoproject.com/)
 [![Database](https://img.shields.io/badge/Database-SQLite-lightgrey.svg)](https://www.sqlite.org/)
+[![Tests](https://img.shields.io/badge/Tests-20%20passed-brightgreen.svg)](#-running-tests)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](#license)
 
 An online storefront and order management system for **Ziba Bakery**, an artisanal bakery and cake shop based in Melbourne, Australia. Built with Django as a university project.
@@ -89,6 +90,12 @@ python manage.py runserver
 Visit:
 - **Shop**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 - **Admin**: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+### 3. Running Tests
+Run the comprehensive automated test suite (20 unit and integration tests):
+```bash
+python manage.py test
+```
 
 ---
 
