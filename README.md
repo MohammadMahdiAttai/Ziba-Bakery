@@ -9,6 +9,64 @@ An online storefront and order management system for **Ziba Bakery**, an artisan
 
 Customers can browse cakes, cupcakes, pastries, and cookies by category, build a cart without needing an account, and complete a simulated two-step checkout with delivery details and card validation. Staff can manage inventory, categories, and customer orders via the customized Django administration panel.
 
+<p align="center">
+  <img src="docs/figures/home.png" alt="Ziba Bakery Homepage" width="100%">
+</p>
+
+---
+
+## 📸 Screenshots & Visual Walkthrough
+
+### 🛒 Storefront & Catalog
+Explore the bakery menu, filter by pastry/cake category, and view individual product details with real-time stock availability.
+
+| Shop Catalog | Product Detail |
+| :---: | :---: |
+| <img src="docs/figures/shop.png" alt="Shop Catalog" width="100%"> | <img src="docs/figures/product_detail.png" alt="Product Detail" width="100%"> |
+
+### 🧺 Cart & Two-Step Checkout
+A streamlined order workflow featuring session-based cart management, delivery address entry, Luhn-validated card payment simulation, and order confirmation receipts.
+
+| Shopping Cart | Step 1: Delivery Details |
+| :---: | :---: |
+| <img src="docs/figures/cart.png" alt="Shopping Cart" width="100%"> | <img src="docs/figures/checkout_delivery.png" alt="Delivery Details" width="100%"> |
+
+| Step 2: Payment Simulation | Order Confirmation |
+| :---: | :---: |
+| <img src="docs/figures/checkout_payment.png" alt="Payment Simulation" width="100%"> | <img src="docs/figures/order_confirmation.png" alt="Order Confirmation" width="100%"> |
+
+### 🛠️ Staff Administration
+Custom-branded Django administrative dashboard for tracking sales, managing stock, and updating categories and products.
+
+<p align="center">
+  <img src="docs/figures/admin.png" alt="Django Admin Dashboard" width="100%">
+</p>
+
+---
+
+## 📐 Architecture & System Design
+
+### 1. System Architecture
+High-level architectural overview illustrating the Django MVT (Model-View-Template) pattern, URL dispatcher, session-based cart layer, template rendering engine, and SQLite database.
+
+<p align="center">
+  <img src="docs/figures/diagram_architecture.png" alt="System Architecture Diagram" width="100%">
+</p>
+
+### 2. Entity-Relationship (ER) Diagram
+Data model design detailing database entities, attributes, primary/foreign keys, and cardinalities across accounts, catalog, and orders.
+
+<p align="center">
+  <img src="docs/figures/diagram_er.png" alt="Entity-Relationship Diagram" width="100%">
+</p>
+
+### 3. Checkout & Ordering Flowchart
+End-to-end checkout execution logic highlighting cart state evaluation, customer authentication checks, form validation, Luhn algorithm execution, and atomic inventory reduction.
+
+<p align="center">
+  <img src="docs/figures/diagram_checkout_flow.png" alt="Checkout Flowchart" width="80%">
+</p>
+
 ---
 
 ## ✨ Features
@@ -56,6 +114,8 @@ ziba_bakery/
 │   └── fixtures/
 │       └── initial_data.json  # Sample bakery menu (4 categories, 12 products)
 ├── core/                      # Marketing & static pages (Home, About, Contact)
+├── docs/
+│   └── figures/               # Screenshots, architecture diagrams, and ER models
 ├── orders/                    # Order placement, Luhn payment validation, stock deduction
 ├── static/
 │   ├── css/style.css          # Kraft Bakery Box theme styling
